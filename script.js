@@ -1,22 +1,21 @@
-import puppeteer from 'puppeteer';
+import Parser from './parser.js';
 
 (async () => {
     const url = 'https://www.shohoz.com/booking/bus/search?fromcity=Dhaka&tocity=Rangpur&doj=28-Mar-2024&dor=';
     const url2 = 'https://www.shohoz.com/booking/bus/search?fromcity=Dhaka&tocity=Rangpur&doj=10-May-2024&dor='
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url);
-    await page.waitForSelector('#bus_tckt_rows');
-    const noResultsNode = await page.$('.bold_ticket_text');
-    
-    if (noResultsNode) {
-        console.log('noting found');
-        browser.close();
+
+    const parser = new Parser(url);
+    await parser.parse();
+
+    if (await parser.noResultsFound()){
+        console.log('Nothing found');
+        parser.close();
         return;
     }
-    
-    const elements = await page.$$('.op_name');
-    const operators = await Promise.all(elements.map(el => el.evaluate(e => e.textContent)));
-    // console.log(operators);
-    browser.close();
+
+    const operators = await parser.getBusOperatorNames();
+    console.log(operators);
+    console.log(await parser.hasBusOperator('S.R Travels (Pvt) Ltd'));
+
+    parser.close();
 })();
