@@ -1,0 +1,11 @@
+{
+  "name": "shohoz-notifier",
+  "version": "1.0.0",
+  "main": "script.js",
+  "author": "ahmedsadman",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^22.6.0"
+  }
+}
