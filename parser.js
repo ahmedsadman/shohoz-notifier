@@ -42,7 +42,9 @@ class Parser {
     }
 
     close() {
-        this.browser.close();
+        if (this.browser) {
+            this.browser.close();
+        }
     }
 }
 
