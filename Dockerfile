@@ -24,4 +24,4 @@ RUN yarn install
 
 COPY --chown=node-app:node-app . .
 
-CMD ["bash", "run.sh"]
+ENTRYPOINT [ "./run.sh" ]

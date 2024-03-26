@@ -8,7 +8,6 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "nodemailer": "^6.9.13",
-    "puppeteer": "^22.6.0",
-    "yargs": "^17.7.2"
+    "puppeteer": "^22.6.0"
   }
 }
