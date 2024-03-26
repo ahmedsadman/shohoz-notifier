@@ -1,10 +1,20 @@
 import 'dotenv/config';
+import yargs from 'yargs';
 import Parser from './parser.js';
 
 (async () => {
-    const url = 'https://www.shohoz.com/booking/bus/search?fromcity=Dhaka&tocity=Rangpur&doj=28-Mar-2024&dor=';
-    const url2 = 'https://www.shohoz.com/booking/bus/search?fromcity=Dhaka&tocity=Rangpur&doj=10-May-2024&dor='
-    const parser = new Parser(url);
+    const argv = yargs(process.argv.slice(2))
+        .alias('u', 'url')
+        .alias('o', 'operator')
+        .alias('e', 'email')
+        .describe('u', 'URL of the Shohoz.com website to parse')
+        .describe('o', 'Bus operator to look for')
+        .describe('e', 'Target email to send notifications to')
+        .demandOption(['u', 'o', 'e'])
+        .help('h')
+        .alias('h', 'help')
+        .parse();
+    const parser = new Parser(argv.url);
 
     try {
         await parser.parse();
@@ -17,7 +27,7 @@ import Parser from './parser.js';
     
         const operators = await parser.getBusOperatorNames();
         console.log(operators);
-        console.log(await parser.hasBusOperator('S.R Travels (Pvt) Ltd'));
+        console.log(await parser.hasBusOperator(argv.operator));
     } catch (err) {
         console.log(err);
     } finally {

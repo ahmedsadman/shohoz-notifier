@@ -44,6 +44,8 @@ class Parser {
     close() {
         if (this.browser) {
             this.browser.close();
+            this.browser = null;
+            this.page = null;
         }
     }
 }
