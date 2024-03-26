@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import Parser from './parser.js';
 
 (async () => {
