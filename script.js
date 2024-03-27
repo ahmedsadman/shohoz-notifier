@@ -20,13 +20,12 @@ import mailer from './mailer.js';
         if (await parser.hasBusOperator(operator)) {
             const subject = `Bus ticket for ${operator} is available`;
             const text = 'This is a reminder. Check out the website to book tickets'
-            const messageId = await mailer.send(email, subject, text);
-            console.log(`Email Sent: ${messageId}`);
+            await mailer.emitSend(email, subject, text);
         }
     } catch (err) {
         console.log(err);
     } finally {
         parser.close();
-        console.log('Check complete');
+        console.log('Script complete');
     }
 })();
