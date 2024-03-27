@@ -24,4 +24,6 @@ RUN yarn install
 
 COPY --chown=node-app:node-app . .
 
+RUN chmod +x run.sh
+
 ENTRYPOINT [ "./run.sh" ]
