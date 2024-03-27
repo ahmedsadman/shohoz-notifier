@@ -16,7 +16,12 @@ class Parser {
     }
 
     async parse() {
-        this.browser = await puppeteer.launch();
+        this.browser = await puppeteer.launch({
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
+            ]
+        });
         const page = await this.browser.newPage();
 
         await page.goto(this.url);
