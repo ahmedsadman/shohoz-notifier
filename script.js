@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import yargs from 'yargs';
 import Parser from './parser.js';
 import mailer from './mailer.js';
 
@@ -11,7 +10,7 @@ import mailer from './mailer.js';
     try {
         await parser.parse();
 
-        if (await parser.noResultsFound()){
+        if (await parser.noResultsFound()) {
             console.log('Nothing found');
             parser.close();
             return;
