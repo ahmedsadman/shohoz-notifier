@@ -21,7 +21,7 @@ class Mailer {
         const lastSentTime = +fs.readFileSync(this.TIME_STORAGE_FILE, { encoding: 'utf8' });
         
         if (Date.now() - lastSentTime < this.TIME_THRESHOLD) {
-            console.log('Email already sent within time threshold');
+            console.log(`Email sent at: ${new Date(lastSentTime).toUTCString()}`);
             return;
         }
         const messageId = await this.send(to, subject, text);

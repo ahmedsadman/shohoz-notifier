@@ -26,6 +26,6 @@ import mailer from './mailer.js';
         console.log(err);
     } finally {
         parser.close();
-        console.log('Script complete');
+        console.log(`Script complete: ${new Date().toUTCString()}`);
     }
 })();
